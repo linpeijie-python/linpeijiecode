@@ -1,16 +1,16 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# @Time    : 2020/9/26 9:38
+# @Time    : 2020/9/26 14:54
 # @Author  : Mark
-# @File    : department.py
+# @File    : dpment.py
 # @Software: PyCharm
 import pytest
 import requests
 import json
 
-corpsecret="FMuZYyBAlTteSDZhsq0qxpdEONhZ8Y0TJr7qMcfoxMg"
-corpid="ww1756db8e44d7af76"
 def test001_get_token():
+    corpsecret = "FMuZYyBAlTteSDZhsq0qxncu9mAfXpL_4cfwaHpvec0"
+    corpid = "ww1756db8e44d7af76"
     url=f"https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid={corpid}&corpsecret={corpsecret}"
     r=requests.get(url).json()
     print(r)
@@ -58,5 +58,3 @@ def test005_update():
     }
     r=requests.post(url,json=data).json()
     print(r)
-
-
