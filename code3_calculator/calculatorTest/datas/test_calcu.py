@@ -6,6 +6,7 @@
 # @Software: PyCharm
 import pytest
 import allure
+
 from code3_calculator.calculatorCode.calculator import Calculator
 
 """
@@ -15,37 +16,64 @@ from code3_calculator.calculatorCode.calculator import Calculator
 """
 
 
+
+
+
 class TestCalc:
+    # 类级setup_class.teardown_class（在类中）,只在类中前后运行一次
+    def setup_class(self):
+        self.calcu = Calculator()
+        print("\nsetup_calss在类开始时运行一次")
+
+    def teardown_class(self):
+        print("teardown_calss在类结束时运行一次")
+
     def setup(self):
-        print("开始计算")
-        self.calcu=Calculator()
+        print("\n-开始计算-")
+        #self.calcu = Calculator()
 
     def teardown(self):
-        print("结束计算")
+        print("\n-结束计算-")
+
     @pytest.mark.parametrize("a,b,expected", [
-        (1,1,2),
-        (-1,-1,-2),
-        (0,0,0)
-    ],ids=["整数","负数","零"])
+        (1, 1, 2),
+        (-1, -1, -2),
+        (0, 0, 0)
+    ], ids=["整数", "负数", "零"])
     @allure.story("加法用例")
-    def test_add1(self,a,b,expected):
-        result = self.calcu.add(a,b)
+    def test_add(self, a, b, expected):
+        result = self.calcu.add(a, b)
         assert result == expected
-    @pytest.mark.add
-    def test_sub(self):
-        #calc = Calculator()
-        result = self.calcu.sub(1,3)
-        assert result == 4
-    def test_add3(self):
-        #calc = Calculator()
-        result = self.calcu.sub(6,3)
-        assert result == 3
-    def test_sub(self):
-        #calc=Calculator()
-        result = self.calcu.sub(6,4)
-        b=self.calcu.div(9,3)
-        assert result ==2
-        assert b==3
+
+    @pytest.mark.parametrize("a,b,expected", [
+        (2, 1, 1),
+        (-1, -2, 1),
+        (0, 0, 0)
+    ], ids=["整数", "负数", "1零"])
+    @allure.story("减法用例")
+    def test_sub(self, a, b, expected):
+        result = self.calcu.sub(a, b)
+        assert result == expected
+
+    @pytest.mark.parametrize("a,b,expected", [
+        (2, 1, 2),
+        (-1, -2, 2),
+        (0, 0, 0)
+    ], ids=["整数", "负数", "1零"])
+    @allure.story("乘法用例")
+    def test_mul(self,a,b,expected):
+        result = self.calcu.mul(a, b)
+        assert result == expected
+
+    @pytest.mark.parametrize("a,b,expected", [
+        (2, 1, 2),
+        (1, 2, 0.5),
+        (0.1, 0.01, 10)
+    ], ids=["整数", "负数", "1零"])
+    @allure.story("除法用例")
+    def test_div(self,a,b,expected):
+        result = self.calcu.div(a,b)
+        assert result == expected
 
     def test_func(self):
         print("test")
