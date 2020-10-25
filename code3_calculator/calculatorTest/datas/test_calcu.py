@@ -6,13 +6,16 @@
 # @Software: PyCharm
 import pytest
 import allure
-
+import os
+import sys.
 from code3_calculator.calculatorCode.calculator import Calculator
 
 """
+pytest 命名规则
 文件名：以test_开头_   (test_*.py)
 类名：以Test开头
 方法名：以test_开头
+识别规则：先识别文件名，再去识别类名，最后是方法名；如果类名不符合，那方法名也不会被识别；
 """
 
 
