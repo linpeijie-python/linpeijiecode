@@ -6,8 +6,7 @@
 # @Software: PyCharm
 import pytest
 import allure
-import os
-import sys
+import yaml
 from code3_calculator.calculatorCode.calculator import Calculator
 
 """
@@ -42,7 +41,7 @@ class TestCalc:
         (1, 1, 2),
         (-1, -1, -2),
         (0, 0, 0)
-    ], ids=["整数", "负数", "零"])
+    ], ids=["整数相加", "负数相加", "为零相加"])
     @allure.story("加法用例")
     def test_add(self, a, b, expected):
         result = self.calcu.add(a, b)
@@ -52,7 +51,7 @@ class TestCalc:
         (2, 1, 1),
         (-1, -2, 1),
         (0, 0, 0)
-    ], ids=["整数", "负数", "1零"])
+    ], ids=["整数减法", "负数减法", "为零减法"])
     @allure.story("减法用例")
     def test_sub(self, a, b, expected):
         result = self.calcu.sub(a, b)
@@ -62,7 +61,7 @@ class TestCalc:
         (2, 1, 2),
         (-1, -2, 2),
         (0, 0, 0)
-    ], ids=["整数", "负数", "1零"])
+    ], ids=["整数相乘", "负数相乘", "零相乘"])
     @allure.story("乘法用例")
     def test_mul(self,a,b,expected):
         result = self.calcu.mul(a, b)
@@ -72,7 +71,7 @@ class TestCalc:
         (2, 1, 2),
         (1, 2, 0.5),
         (0.1, 0.01, 10)
-    ], ids=["整数", "负数", "1零"])
+    ], ids=["整数相除", "负数相除", "零相除"])
     @allure.story("除法用例")
     def test_div(self,a,b,expected):
         result = self.calcu.div(a,b)
