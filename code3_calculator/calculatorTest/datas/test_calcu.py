@@ -7,7 +7,7 @@
 import pytest
 import allure
 import os
-import sys.
+import sys
 from code3_calculator.calculatorCode.calculator import Calculator
 
 """
