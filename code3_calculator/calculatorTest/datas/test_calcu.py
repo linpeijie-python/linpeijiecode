@@ -28,7 +28,7 @@ class TestCalc:
         print("\nsetup_calss在类开始时运行一次")
 
     def teardown_class(self):
-        print("teardown_calss在类结束时运行一次")
+        print("\nteardown_calss在类结束时运行一次")
 
     def setup(self):
         print("\n-开始计算-")
@@ -40,19 +40,22 @@ class TestCalc:
     @pytest.mark.parametrize("a,b,expected", [
         (1, 1, 2),
         (-1, -1, -2),
-        (0, 0, 0)
-    ], ids=["整数相加", "负数相加", "为零相加"])
+        (0, 0, 0),
+        (0.1,0.2,0.3)
+    ], ids=["整数相加", "负数相加", "为零相加","小数相加"])
     @allure.story("加法用例")
+    @pytest.mark.add
     def test_add(self, a, b, expected):
-        result = self.calcu.add(a, b)
+        result = round(self.calcu.add(a, b),2)
         assert result == expected
 
     @pytest.mark.parametrize("a,b,expected", [
         (2, 1, 1),
-        (-1, -2, 1),
+        (-1, -1,0),
         (0, 0, 0)
     ], ids=["整数减法", "负数减法", "为零减法"])
     @allure.story("减法用例")
+    @pytest.mark.sub
     def test_sub(self, a, b, expected):
         result = self.calcu.sub(a, b)
         assert result == expected
@@ -60,9 +63,11 @@ class TestCalc:
     @pytest.mark.parametrize("a,b,expected", [
         (2, 1, 2),
         (-1, -2, 2),
-        (0, 0, 0)
-    ], ids=["整数相乘", "负数相乘", "零相乘"])
+        (0, 0, 0),
+        (25,25,625)
+    ], ids=["整数相乘", "负数相乘", "零相乘","两位数相乘"])
     @allure.story("乘法用例")
+    @pytest.mark.mul
     def test_mul(self,a,b,expected):
         result = self.calcu.mul(a, b)
         assert result == expected
@@ -73,9 +78,10 @@ class TestCalc:
         (0.1, 0.01, 10)
     ], ids=["整数相除", "负数相除", "零相除"])
     @allure.story("除法用例")
+    @pytest.mark.div
     def test_div(self,a,b,expected):
         result = self.calcu.div(a,b)
         assert result == expected
 
-    def test_func(self):
+    def test_fu(self):
         print("test")
