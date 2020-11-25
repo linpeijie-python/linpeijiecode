@@ -17,9 +17,12 @@ pytest 命名规则
 识别规则：先识别文件名，再去识别类名，最后是方法名；如果类名不符合，那方法名也不会被识别；
 """
 
-
-
-
+def get_datas():
+    with open('./calc.yml',encoding='utf-8') as f:
+        mydatas=yaml.safe_load(f)
+        adddatas=mydatas['add']['mydatas']
+        myids=mydatas['add']['myids']
+    return [adddatas,myids]
 
 class TestCalc:
     # 类级setup_class.teardown_class（在类中）,只在类中前后运行一次
@@ -37,12 +40,7 @@ class TestCalc:
     def teardown(self):
         print("\n-结束计算-")
 
-    @pytest.mark.parametrize("a,b,expected", [
-        (1, 1, 2),
-        (-1, -1, -2),
-        (0, 0, 0),
-        (0.1,0.2,0.3)
-    ], ids=["整数相加", "负数相加", "为零相加","小数相加"])
+    @pytest.mark.parametrize("a,b,expected", get_datas()[0],ids=get_datas()[1])
     @allure.story("加法用例")
     @pytest.mark.add
     def test_add(self, a, b, expected):
